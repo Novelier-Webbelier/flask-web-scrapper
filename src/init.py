@@ -22,10 +22,10 @@ def report():
 
     if word:
         word = word.lower()
-        from_db = fake_db.get(word)
+        existingJobs = fake_db.get(word)
 
-        if from_db:
-            jobs = from_db
+        if existingJobs:
+            jobs = existingJobs
         else:
             jobs = get_jobs(word)
             fake_db[word] = jobs
@@ -33,6 +33,11 @@ def report():
     else:
         return redirect("/")
 
-    return render_template("report.html", searchingBy=word, resultsNumber=len(jobs))
+    return render_template(
+        "report.html",
+        searchingBy=word,
+        resultsNumber=len(jobs),
+        jobs=jobs
+    )
 
 app.run()

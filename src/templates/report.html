@@ -3,12 +3,33 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
+    <style type="text/css" media="screen">
+      section {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 20px;
+      }
+    </style>
     <title>Job Scraper</title>
   </head>
   <body>
 
     <h1>Search Results</h1>
     <h3>Found {{resultsNumber}} resutls for : {{searchingBy}}</h3>
+
+    <section>
+      <h4>Title</h4>
+      <h4>Company</h4>
+      <h4>Location</h4>
+      <h4>Link</h4>
+
+      {% for job in jobs %}
+      <span>{{job.job_name}}</span>
+        <span>{{job.company_name}}</span>
+        <span>{{job.company_location}}</span>
+        <a href="{{job.link}}" target="_blank">Apply</a>
+      {% endfor %}
+    </section>
 
   </body>
 </html>
