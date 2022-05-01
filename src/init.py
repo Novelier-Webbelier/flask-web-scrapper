@@ -40,4 +40,20 @@ def report():
         jobs=jobs
     )
 
+# http://127.0.0.1:5000/export?job=react
+@app.route("/export")
+def export():
+    try:
+        word = request.args.get("word")
+        if not word:
+            raise Exception()
+        word = word.lower()
+        jobs = fake_db.get(word)
+
+        if not jobs:
+            raise Exception()
+        return f"Generate CSV for {word}"
+    except:
+        return redirect("/")
+
 app.run()
